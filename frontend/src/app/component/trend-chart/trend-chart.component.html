@@ -1,0 +1,20 @@
+ <!-- Charts -->
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="bg-secondary rounded p-3 text-white h-100">
+                  <h6>Daily Trend</h6>
+                  <canvas baseChart
+                          [data]="barChartData"
+                          [labels]="labels"
+                          [options]="chartOptions"
+                          chartType="bar">
+                  </canvas>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="bg-secondary rounded p-3 text-white h-100">
+                  <h6>Visitor Demographics</h6>
+                 
+                </div>
+              </div>
+            </div>

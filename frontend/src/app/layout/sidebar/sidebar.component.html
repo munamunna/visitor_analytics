@@ -1,0 +1,22 @@
+ <!-- Offcanvas Sidebar for Mobile -->
+ <div class="offcanvas offcanvas-start bg-secondary text-white" tabindex="-1" id="mobileSidebar">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title text-warning">Nxt<span class="text-white">Eye</span></h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column align-items-start">
+      <div *ngFor="let item of navItems" class="mb-3 text-start w-100">
+        <i [class]="item.icon" class="me-2"></i> {{ item.name }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Desktop Layout -->
+  <div class="d-flex flex-column flex-md-row" style="min-height: 100vh;">
+    <!-- Sidebar for Desktop -->
+    <div class="bg-secondary text-white d-none d-md-flex flex-column align-items-center py-3 px-2" style="width: 80px;">
+      <div *ngFor="let item of navItems" class="text-center mb-3">
+        <i [class]="item.icon" class="fs-5 d-block"></i>
+        <small class="d-block mt-1">{{ item.name }}</small>
+      </div>
+    </div>

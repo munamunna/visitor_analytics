@@ -1,0 +1,125 @@
+
+  
+    <!-- Navbar -->
+    <app-navbar></app-navbar>
+  
+    <!-- Main layout with sidebar and content -->
+    <div class="d-flex flex-grow-1 flex-column flex-md-row">
+      
+      <!-- Sidebar -->
+      <app-sidebar></app-sidebar>
+      
+      <!-- Main Content -->
+      <div class="flex-grow-1 p-3" style="background-color: #f5f9ff;">
+        
+        <!-- Filters inside form -->
+        <form [formGroup]="filterForm" (ngSubmit)="applyFilters()">
+          <div class="bg-white p-3 rounded shadow-sm mb-4">
+            <div class="row g-2 align-items-center">
+  
+              <div class="col-md-3 col-sm-6">
+                <select class="form-select" formControlName="floor">
+                    <option value="" disabled selected hidden>Select Floor</option>
+                    <option *ngFor="let floor of floors" [value]="floor">{{ floor }}</option>
+                  </select>
+                  <div *ngIf="filterForm.get('floor')?.touched && filterForm.get('floor')?.invalid" class="text-danger small">
+                    Floor is required.
+                  </div>
+                  
+              </div>
+  
+              <div class="col-md-3 col-sm-6">
+                <input type="text" formControlName="dateRange" class="form-control" placeholder="YYYY-MM-DD to YYYY-MM-DD" />
+                <div *ngIf="filterForm.get('dateRange')?.touched && filterForm.get('dateRange')?.invalid" class="text-danger small">
+                  Date range is required.
+                </div>
+              </div>
+
+  
+              <div class="col-md-4 col-12">
+                <div class="d-flex flex-wrap gap-2">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Report Type</mat-label>
+                        <mat-select formControlName="reportTypes" multiple>
+                          <mat-option *ngFor="let type of reportTypes" [value]="type">
+                            {{ type }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <div *ngIf="filterForm.get('reportTypes')?.touched && filterForm.get('reportTypes')?.invalid" class="text-danger small">
+                        At least one report type is required.
+                      </div>
+                </div>
+              </div>
+  
+              <div class="col-md-2 col-12">
+                <button class="btn btn-primary w-100" type="submit">Search</button>
+              </div>
+  
+            </div>
+          </div>
+        </form>
+  
+        <!-- Your charts or content here -->
+        <!-- Cards & Charts Container -->
+<div class="bg-white rounded shadow-sm p-4">
+  <h4 class="text-center mb-4 text-dark">Reports Overview</h4>
+
+  <!-- Static Cards -->
+  <div class="row g-3 text-white mb-4">
+
+    <!-- Total Visitors -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="bg-secondary rounded p-3 d-flex justify-content-between align-items-center h-100">
+        <div>
+          <div class="fs-4 fw-bold">{{ totalVisitors || 'N/A' }}</div>
+          <div class="small">Total Visitors</div>
+        </div>
+        <i class="bi bi-people-fill" style="font-size: 1.5rem;"></i>
+      </div>
+    </div>
+
+    <!-- Busiest Day -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="bg-secondary rounded p-3 d-flex justify-content-between align-items-center h-100">
+        <div>
+          <div class="fs-4 fw-bold">{{ busiestDay || 'N/A' }}</div>
+          <div class="small">Busiest Day</div>
+        </div>
+        <i class="bi bi-calendar-event" style="font-size: 1.5rem;"></i>
+      </div>
+    </div>
+
+    <!-- Busiest Hour -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="bg-secondary rounded p-3 d-flex justify-content-between align-items-center h-100">
+        <div>
+          <div class="fs-4 fw-bold">{{ busiestHour || 'N/A' }}</div>
+          <div class="small">Busiest Hour</div>
+        </div>
+        <i class="bi bi-clock-fill" style="font-size: 1.5rem;"></i>
+      </div>
+    </div>
+
+    <!-- Busiest Section -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="bg-secondary rounded p-3 d-flex justify-content-between align-items-center h-100">
+        <div>
+          <div class="fs-4 fw-bold">{{ busiestSection || 'N/A' }}</div>
+          <div class="small">Busiest Section</div>
+        </div>
+        <i class="bi bi-geo-alt-fill" style="font-size: 1.5rem;"></i>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Chart -->
+  <app-trend-chart [labels]="dailyLabels" [data]="dailyCounts"></app-trend-chart>
+</div>
+
+  
+      </div>
+    </div>
+
+  
